@@ -10,7 +10,7 @@ from config import db, bcrypt
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users_table'
     # Add serialization rules
-    serialize_rules = ('-password_hash', '-progress_rel.user_rel', '-review_rel.user_rel')
+    serialize_rules = ('-password_hash', '-user_quest_rel.user_rel', '-review_rel.user_rel')
     #columns
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String,unique=True)
@@ -22,7 +22,7 @@ class User(db.Model, SerializerMixin):
     age = db.Column(db.Integer)
     city = db.Column(db.String)
     # Add relationships
-    progress_rel = db.relationship('Progress', back_populates = 'user_rel', cascade = 'all, delete-orphan')
+    user_quest_rel = db.relationship('UserQuest', back_populates = 'user_rel', cascade = 'all, delete-orphan')
     review_rel = db.relationship('Review', back_populates = 'user_rel', cascade = 'all, delete-orphan')
     #password stuff
     @hybrid_property
@@ -59,10 +59,10 @@ class User(db.Model, SerializerMixin):
             raise ValueError("Please enter a valid phone number")
         return phone_number
 
-class Progress(db.Model, SerializerMixin):
-    __tablename__ = 'progress_table'
+class UserQuest(db.Model, SerializerMixin):
+    __tablename__ = 'user_quests_table'
     # Add serialization rules
-    serialize_rules = ('-quest_rel.progress_rel', '-user_rel.progress_rel')
+    serialize_rules = ('-quest_rel.user_quest_rel', '-user_rel.user_quest_rel')
     #columns
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
@@ -70,8 +70,8 @@ class Progress(db.Model, SerializerMixin):
     last_given = db.Column(db.Integer)
     status = db.Column(db.String)
     # Add relationships
-    user_rel = db.relationship('User', back_populates = 'progress_rel')
-    quest_rel = db.relationship('Quest', back_populates = 'progress_rel')
+    user_rel = db.relationship('User', back_populates = 'user_quest_rel')
+    quest_rel = db.relationship('Quest', back_populates = 'user_quest_rel')
     #validations
     @validates('status')
     def validate_status(self, key, status):
@@ -83,7 +83,7 @@ class Progress(db.Model, SerializerMixin):
 class Quest(db.Model, SerializerMixin):
     __tablename__ = 'quests_table'
     # Add serialization rules
-    serialize_rules = ('-progress_rel.quest_rel', '-review_rel.quest_rel')
+    serialize_rules = ('-user_quest_rel.quest_rel', '-review_rel.quest_rel')
     #columns
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
@@ -93,7 +93,7 @@ class Quest(db.Model, SerializerMixin):
     city = db.Column(db.String)
     age_restriction = db.Column(db.Integer)
     # Add relationships
-    progress_rel = db.relationship('Progress', back_populates = 'quest_rel', cascade = 'all, delete-orphan')
+    user_quest_rel = db.relationship('UserQuest', back_populates = 'quest_rel', cascade = 'all, delete-orphan')
     review_rel = db.relationship('Review', back_populates = 'quest_rel', cascade = 'all, delete-orphan')
 
 class Review(db.Model, SerializerMixin):

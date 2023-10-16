@@ -8,7 +8,7 @@ from flask_restful import Resource
 
 # Local imports
 from config import app, db, api
-from models import User, Quest, Progress, Review
+from models import User, Quest, UserQuest, Review
 # Add your model imports
 
 
@@ -175,13 +175,13 @@ class QuestById_Route(Resource):
             return {"error": "Quest not found"}, 404
 api.add_resource(QuestById_Route, '/quests/<int:id>')
 
-class Progress_Route(Resource):
+class UserQuests_Route(Resource):
     def get(self):
-        progresses = [progress.to_dict() for progress in Progress.query.all()]
-        return progresses, 200
+        user_quests = [user_quest.to_dict() for user_quest in UserQuest.query.all()]
+        return user_quests, 200
     def post(self):
         try:
-            new_progress = Progress(
+            new_user_quest = UserQuest(
                 user_id=request.get_json().get('user_id'),
                 quest_id=request.get_json().get('quest_id'),
                 last_given=request.get_json().get('last_given'),
@@ -191,49 +191,49 @@ class Progress_Route(Resource):
             return {"errors": str(e)}, 400
             
 
-        db.session.add(new_progress)
+        db.session.add(new_user_quest)
         db.session.commit()
 
-        return new_progress.to_dict(), 200
-api.add_resource(Progress_Route, '/progresses')
-class ProgressById_Route(Resource):
+        return new_user_quest.to_dict(), 200
+api.add_resource(UserQuests_Route, '/userquests')
+class UserQuestById_Route(Resource):
     def get(self, id):
-        progress = Progress.query.filter_by(id=id).first()
-        if progress:
-            return progress.to_dict(), 200
-        return {"error": "Progress not found"}, 404
+        user_quest = UserQuest.query.filter_by(id=id).first()
+        if user_quest:
+            return user_quest.to_dict(), 200
+        return {"error": "User quest not found"}, 404
     def patch(self, id):
-        progress = Progress.query.filter_by(id=id).first()
+        user_quest = UserQuest.query.filter_by(id=id).first()
 
-        if progress:
+        if user_quest:
             dtp = request.get_json()
             errors = []
             for attr in dtp:
                 try:
-                    setattr(progress, attr, dtp[attr])
+                    setattr(user_quest, attr, dtp[attr])
                 except ValueError as e:
                     errors.append(e.__repr__())
             if len(errors) != 0:
                 return {"errors": errors}, 400
             else:
-                db.session.add(progress)
+                db.session.add(user_quest)
                 db.session.commit()
-                return progress.to_dict(), 202
+                return user_quest.to_dict(), 202
         
-        return {"error": "Progress not found"}, 404
+        return {"error": "User quest not found"}, 404
     
     def delete(self, id):
-        progress = Progress.query.filter_by(id=id).first()
-        if progress:
+        user_quest = UserQuest.query.filter_by(id=id).first()
+        if user_quest:
             try:
-                db.session.delete(progress)
+                db.session.delete(user_quest)
                 db.session.commit()
                 return 'Congrats you failed Muahahahahahahaha', 202
             except Exception:
                 return 'Whoops', 400
         else:
-            return {"error": "Progress not found"}, 404
-api.add_resource(ProgressById_Route, '/progresses/<int:id>')
+            return {"error": "User quest not found"}, 404
+api.add_resource(UserQuestById_Route, '/userquests/<int:id>')
 
 class Reviews_Route(Resource):
     def get(self):
