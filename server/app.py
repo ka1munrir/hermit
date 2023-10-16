@@ -235,6 +235,67 @@ class ProgressById_Route(Resource):
             return {"error": "Progress not found"}, 404
 api.add_resource(ProgressById_Route, '/progresses/<int:id>')
 
+class Reviews_Route(Resource):
+    def get(self):
+        reviews = [review.to_dict() for review in Review.query.all()]
+        return reviews, 200
+    def post(self):
+        try:
+            new_review = Review(
+                user_id=request.get_json().get('user_id'),
+                quest_id=request.get_json().get('quest_id'),
+                difficulty_rating=request.get_json().get('difficulty_rating'),
+                goodness_rating=request.get_json().get('goodness_rating'),
+                feedback=request.get_json().get('feedback')
+            )
+        except ValueError as e:
+            return {"errors": str(e)}, 400
+            
+
+        db.session.add(new_review)
+        db.session.commit()
+
+        return new_review.to_dict(), 200
+api.add_resource(Reviews_Route, '/reviews')
+class ReviewById_Route(Resource):
+    def get(self, id):
+        review = Review.query.filter_by(id=id).first()
+        if review:
+            return review.to_dict(), 200
+        return {"error": "Review not found"}, 404
+    def patch(self, id):
+        review = Review.query.filter_by(id=id).first()
+
+        if review:
+            dtp = request.get_json()
+            errors = []
+            for attr in dtp:
+                try:
+                    setattr(review, attr, dtp[attr])
+                except ValueError as e:
+                    errors.append(e.__repr__())
+            if len(errors) != 0:
+                return {"errors": errors}, 400
+            else:
+                db.session.add(review)
+                db.session.commit()
+                return review.to_dict(), 202
+        
+        return {"error": "Review not found"}, 404
+    
+    def delete(self, id):
+        review = Review.query.filter_by(id=id).first()
+        if review:
+            try:
+                db.session.delete(review)
+                db.session.commit()
+                return 'we deem this review unworthy .... tsssss', 202
+            except Exception:
+                return 'oh no', 400
+        else:
+            return {"error": "Name not found"}, 404
+api.add_resource(ReviewById_Route, '/reviews/<int:id>')
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
 

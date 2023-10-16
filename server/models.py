@@ -114,6 +114,6 @@ class Review(db.Model, SerializerMixin):
     #validations
     @validates('difficulty_rating', 'goodness_rating')
     def validate_null_false(self, key, value):
-        if not value:
+        if value:
             return value
         return ValueError(f'{key} must have a value')
