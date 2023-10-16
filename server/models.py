@@ -75,7 +75,7 @@ class Progress(db.Model, SerializerMixin):
     #validations
     @validates('status')
     def validate_status(self, key, status):
-        STATUS = ['Completed', 'InProgress', 'Not Started', 'Forsaken']
+        STATUS = ['Completed', 'In Progress', 'Not Started', 'Forsaken']
         if status not in STATUS:
             return ValueError(f'Status must be {STATUS}')
         return status
@@ -86,6 +86,8 @@ class Quest(db.Model, SerializerMixin):
     serialize_rules = ('-progress_rel.quest_rel', '-review_rel.quest_rel')
     #columns
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    description = db.Column(db.String)
     genre = db.Column(db.String)
     difficulty = db.Column(db.Integer)
     city = db.Column(db.String)
