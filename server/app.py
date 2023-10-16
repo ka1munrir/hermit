@@ -48,6 +48,69 @@ class CheckSession(Resource):
         return {'message': 'Not Authorized'}, 401
 api.add_resource(CheckSession, '/check_session')
 
+class Users_Route(Resource):
+    def get(self):
+        users = [user.to_dict() for user in User.query.all()]
+        return users, 200
+    def post(self):
+        try:
+            new_user = User(
+                username=request.get_json().get('username'),
+                password_hash=request.get_json().get('password_hash'),
+                email=request.get_json().get('email'),
+                phone_number=request.get_json().get('phone_number'),
+                first_name=request.get_json().get('first_name'),
+                last_name=request.get_json().get('last_name'),
+                age=request.get_json().get('age'),
+                city=request.get_json().get('city')
+            )
+        except ValueError as e:
+            return {"errors": str(e)}, 400
+            
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return new_user.to_dict(), 200
+api.add_resource(Users_Route, '/users')
+class UserById_Route(Resource):
+    def get(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user:
+            return user.to_dict(), 200
+        return {"error": "User not found"}, 404
+    def patch(self, id):
+        user = User.query.filter_by(id=id).first()
+
+        if user:
+            dtp = request.get_json()
+            errors = []
+            for attr in dtp:
+                try:
+                    setattr(user, attr, dtp[attr])
+                except ValueError as e:
+                    errors.append(e.__repr__())
+            if len(errors) != 0:
+                return {"errors": errors}, 400
+            else:
+                db.session.add(user)
+                db.session.commit()
+                return user.to_dict(), 202
+        
+        return {"error": "User not found"}, 404
+    
+    def delete(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user:
+            try:
+                db.session.delete(user)
+                db.session.commit()
+                return '', 204
+            except Exception:
+                return '', 400
+        else:
+            return {"error": "User not found"}, 404
+api.add_resource(UserById_Route, '/users/<int:id>')
 
 
 if __name__ == '__main__':
