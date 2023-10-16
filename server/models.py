@@ -2,6 +2,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import validates
+import math
 
 from config import db, bcrypt
 
@@ -41,19 +42,22 @@ class User(db.Model, SerializerMixin):
     #validations
     @validates('username', 'password_hash', 'first_name', 'last_name', 'age')
     def validate_null_false(self, key, value):
-        if not value:
+        if value:
             return value
         return ValueError(f'{key} must have a value')
     @validates('city')
     def validate_city(self, key, city):
-        CITIES = ['denver',]
-        if not city:
+        CITIES = ['denver']
+        if city:
             if city.lower() in CITIES:
                 return city.lower()
             return ValueError(f'We do not support {city.lower()}. We only support {CITIES}.')
         return ValueError('city must have a value')
-    
-    
+    @validates('phone_number')
+    def validate_phone(self, key, phone_number):
+        if math.floor(math.log10(phone_number)) != 9:
+            raise ValueError("Please enter a valid phone number")
+        return phone_number
 
 class Progress(db.Model, SerializerMixin):
     __tablename__ = 'progress_table'

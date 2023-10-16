@@ -53,16 +53,17 @@ class Users_Route(Resource):
         users = [user.to_dict() for user in User.query.all()]
         return users, 200
     def post(self):
+        print(request.get_json())
         try:
             new_user = User(
-                username=request.get_json().get('username'),
-                password_hash=request.get_json().get('password_hash'),
-                email=request.get_json().get('email'),
-                phone_number=request.get_json().get('phone_number'),
-                first_name=request.get_json().get('first_name'),
-                last_name=request.get_json().get('last_name'),
-                age=request.get_json().get('age'),
-                city=request.get_json().get('city')
+                username=request.get_json()['username'],
+                password_hash=request.get_json()['password_hash'],
+                email=request.get_json()['email'],
+                phone_number=request.get_json()['phone_number'],
+                first_name=request.get_json()['first_name'],
+                last_name=request.get_json()['last_name'],
+                age=request.get_json()['age'],
+                city=request.get_json()['city']
             )
         except ValueError as e:
             return {"errors": str(e)}, 400
@@ -105,7 +106,7 @@ class UserById_Route(Resource):
             try:
                 db.session.delete(user)
                 db.session.commit()
-                return '', 204
+                return 'User no more', 204
             except Exception:
                 return '', 400
         else:
