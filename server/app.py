@@ -112,6 +112,11 @@ class UserById_Route(Resource):
         else:
             return {"error": "User not found"}, 404
 api.add_resource(UserById_Route, '/users/<int:id>')
+class UserQuestsByUser_Route(Resource):
+    def get(self, id):
+        user_quests = [user_quest.to_dict() for user_quest in UserQuest.query.filter_by(user_id=id).all()]
+        return user_quests, 200
+api.add_resource(UserQuestsByUser_Route, '/users/<int:id>/userquests')
 
 class Quests_Route(Resource):
     def get(self):
@@ -282,18 +287,6 @@ class ReviewById_Route(Resource):
                 return review.to_dict(), 202
         
         return {"error": "Review not found"}, 404
-    
-    def delete(self, id):
-        review = Review.query.filter_by(id=id).first()
-        if review:
-            try:
-                db.session.delete(review)
-                db.session.commit()
-                return 'we deem this review unworthy .... tsssss', 202
-            except Exception:
-                return 'oh no', 400
-        else:
-            return {"error": "Name not found"}, 404
 api.add_resource(ReviewById_Route, '/reviews/<int:id>')
 
 if __name__ == '__main__':
