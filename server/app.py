@@ -56,14 +56,14 @@ class Users_Route(Resource):
         print(request.get_json())
         try:
             new_user = User(
-                username=request.get_json()['username'],
-                password_hash=request.get_json()['password_hash'],
-                email=request.get_json()['email'],
-                phone_number=request.get_json()['phone_number'],
                 first_name=request.get_json()['first_name'],
                 last_name=request.get_json()['last_name'],
-                age=request.get_json()['age'],
-                city=request.get_json()['city']
+                email=request.get_json()['email'],
+                phone_number=int(request.get_json()['phone_number']),
+                age=int(request.get_json()['age']),
+                city=request.get_json()['city'],
+                username=request.get_json()['username'],
+                password_hash=request.get_json()['password']
             )
         except ValueError as e:
             return {"errors": str(e)}, 400

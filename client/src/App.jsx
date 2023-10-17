@@ -1,7 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -12,6 +9,7 @@ import {
 import RootLayout from './components/layout/RootLayout'
 import Home from './pages/home/Home.jsx'
 import LogIn from './pages/login/LogIn.jsx'
+import SignUp from './pages/signup/SignUp.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +19,7 @@ function App() {
       <Route path='/' element={<RootLayout/>}>
         <Route index element={<Home/>}/>
         <Route path='/login' element={<LogIn/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
       </Route>
     )
   );
