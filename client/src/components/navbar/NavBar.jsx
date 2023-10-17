@@ -22,7 +22,7 @@ function NavBar() {
       </nav>
     </header>
   )
-  return loggedInNavBar
+  return loggedOutNavBar
 
 }
 
