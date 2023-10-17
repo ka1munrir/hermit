@@ -9,6 +9,7 @@ import {
 import RootLayout from './components/layout/RootLayout'
 import Home from './pages/home/Home.jsx'
 import LogIn from './pages/login/LogIn.jsx'
+import SignUp from './pages/signup/SignUp.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
       <Route path='/' element={<RootLayout/>}>
         <Route index element={<Home/>}/>
         <Route path='/login' element={<LogIn/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
       </Route>
     )
   );
