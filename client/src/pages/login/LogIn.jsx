@@ -1,8 +1,10 @@
 import { useState } from "react";
+import useUserStore from "../../hooks/userStore";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { updateUser, user } = useUserStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ function Login() {
       })
       .then(data => {
         console.log(data);
+        updateUser(data)
       })
       .catch(error => {
         console.log("error", error.message);

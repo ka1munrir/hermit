@@ -1,8 +1,11 @@
-import React from 'react'
+import { React} from 'react'
+import useUserStore from "../../hooks/userStore";
 import { NavLink } from 'react-router-dom'
 import'../navbar/NavBar.css'
 
 function NavBar() {
+  const { user } = useUserStore();
+
   const loggedOutNavBar = (
     <header>
       <nav>
@@ -15,14 +18,14 @@ function NavBar() {
   const loggedInNavBar = (
     <header>
       <nav>
-        <NavLink to='/'>Quests</NavLink>
+        <NavLink to='/'>Dashboard</NavLink>
         <NavLink to='/'>Guilds</NavLink>
         <NavLink to='/'>Profile</NavLink>
         <NavLink to='/'>Log Out</NavLink>
       </nav>
     </header>
   )
-  return loggedOutNavBar
+  return user.username ? loggedInNavBar : loggedOutNavBar
 
 }
 
