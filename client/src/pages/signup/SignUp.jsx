@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 
 const Signup = () => {
-    const nav=useNavigate();
+    const nav = useNavigate();
     const formik = useFormik({
         initialValues: {
-            first_name:'',
-            last_name:'',
+            first_name: '',
+            last_name: '',
             email: '',
-            phone_number: 1000000000,
+            // phone_number: 1000000000,
             age: 0,
             city: '',
             username: '',
@@ -19,23 +19,23 @@ const Signup = () => {
             first_name: Yup.string().required('Required'),
             last_name: Yup.string().required('Required'),
             email: Yup.string().required('Required').email('Invalid email address'),
-            phone_number: Yup.number(),
+            // phone_number: Yup.number(),
             age: Yup.number().required('Required'),
             city: Yup.string(),
             username: Yup.string().required('Required'),
             password: Yup.string().required('Required')
-            .min(8, 'Username should be over 7 characters long')
-            .matches(/[a-zA-Z]/, 'Password must contain at least one letter.')
-            .matches(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/, 'Password must contain at least one special character.'),
+                .min(8, 'Username should be over 7 characters long')
+                .matches(/[a-zA-Z]/, 'Password must contain at least one letter.')
+                .matches(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/, 'Password must contain at least one special character.'),
         }),
         onSubmit: values => {
             // console.log('Form data', values);
-            
+
             const userObject = {
                 "first_name": values.first_name,
                 "last_name": values.first_name,
                 "email": values.email,
-                "phone_number": values.phone_number,
+                // "phone_number": values.phone_number,
                 "age": values.age,
                 "city": values.city,
                 "username": values.username,
@@ -43,31 +43,31 @@ const Signup = () => {
             }
             console.log(userObject);
 
-            fetch('/api/users',{
+            fetch('/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(userObject)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response error");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.log("error", error.message);
-            });
-            
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response error");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.log("error", error.message);
+                });
+
         },
     });
 
     return (
-        <form onSubmit={(e)=>{
+        <form onSubmit={(e) => {
             formik.handleSubmit(e);
             nav("/login");
         }}>
@@ -101,7 +101,7 @@ const Signup = () => {
                     <div className="error">{formik.errors.email}</div>
                 ) : null}
             </div>
-            <div className="input-group">
+            {/* <div className="input-group">
                 <label>Phone Number</label>
                 <input
                     type="phone_number"
@@ -110,7 +110,7 @@ const Signup = () => {
                 {formik.touched.phone_number && formik.errors.phone_number ? (
                     <div className="error">{formik.errors.phone_number}</div>
                 ) : null}
-            </div>
+            </div> */}
             <div className="input-group">
                 <label>Age</label>
                 <input

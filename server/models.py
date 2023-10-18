@@ -16,7 +16,7 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String,unique=True)
     _password_hash = db.Column(db.String)
     email = db.Column(db.String)
-    phone_number = db.Column(db.Integer)
+    # phone_number = db.Column(db.Integer)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     age = db.Column(db.Integer)
@@ -53,11 +53,11 @@ class User(db.Model, SerializerMixin):
                 return city.lower()
             return ValueError(f'We do not support {city.lower()}. We only support {CITIES}.')
         return ValueError('city must have a value')
-    @validates('phone_number')
-    def validate_phone(self, key, phone_number):
-        if math.floor(math.log10(phone_number)) != 9:
-            raise ValueError("Please enter a valid phone number")
-        return phone_number
+    # @validates('phone_number')
+    # def validate_phone(self, key, phone_number):
+    #     if math.floor(math.log10(phone_number)) != 9:
+    #         raise ValueError("Please enter a valid phone number")
+    #     return phone_number
 
 class UserQuest(db.Model, SerializerMixin):
     __tablename__ = 'user_quests_table'
@@ -95,6 +95,13 @@ class Quest(db.Model, SerializerMixin):
     # Add relationships
     user_quest_rel = db.relationship('UserQuest', back_populates = 'quest_rel', cascade = 'all, delete-orphan')
     review_rel = db.relationship('Review', back_populates = 'quest_rel', cascade = 'all, delete-orphan')
+    # add validations
+    @validates('genre')
+    def validate_status(self, key, genre):
+        GENRE = ['Mage', 'Bard',"Warrior"]
+        if genre not in GENRE:
+            return ValueError(f'Status must be {GENRE}')
+        return genre
 
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews_table'
