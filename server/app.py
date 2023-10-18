@@ -42,7 +42,7 @@ api.add_resource(Logout_Route, '/logout')
 
 class CheckSession(Resource):
     def get(self):
-        user = User.query.filter_by(id=session.get('user_id'))
+        user = User.query.filter_by(id=session.get('user_id')).first()
         if user:
             return user.to_dict(), 200
         return {'message': 'Not Authorized'}, 401
