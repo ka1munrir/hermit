@@ -11,6 +11,7 @@ import RootLayout from './components/layout/RootLayout'
 import Home from './pages/home/Home.jsx'
 import LogIn from './pages/login/LogIn.jsx'
 import SignUp from './pages/signup/SignUp.jsx'
+import Dashboard from './pages/dashboard/Dashboard.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route index element={<Home/>}/>
       <Route path='/login' element={<LogIn/>}/>
       <Route path='/signup' element={<SignUp/>}/>
+      <Route path='/dashboard' element={<Dashboard/>}/>
     </Route>
   )
 );
@@ -28,10 +30,8 @@ function App() {
     fetch("/api/check_session")
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.username);
         data.username != undefined ? updateUser(data) : null;
         console.log("this is whos logged in", data);
-        // console.log(user);
       });
   }, []);
   

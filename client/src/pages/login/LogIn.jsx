@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import useUserStore from "../../hooks/userStore";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { updateUser, user } = useUserStore();
+  const { updateUser} = useUserStore();
+
+  const nav = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +31,7 @@ function Login() {
       .then(data => {
         console.log(data);
         updateUser(data)
+        nav("/dashboard");
       })
       .catch(error => {
         console.log("error", error.message);
