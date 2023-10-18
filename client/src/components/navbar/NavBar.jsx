@@ -18,7 +18,7 @@ function NavBar() {
   const loggedInNavBar = (
     <header>
       <nav>
-        <NavLink to='/'>Dashboard</NavLink>
+        <NavLink to='/dashboard'>Dashboard</NavLink>
         <NavLink to='/'>Guilds</NavLink>
         <NavLink to='/'>Profile</NavLink>
         <NavLink to='/'>Log Out</NavLink>
