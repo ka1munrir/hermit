@@ -1,7 +1,15 @@
 import React from 'react'
 import '../home/Home.css'
+import { useNavigate } from "react-router-dom";
+
+import useUserStore from "../../hooks/userStore";
 
 function Home() {
+  const nav = useNavigate();
+  const { user } = useUserStore();
+  if (user.username != undefined){
+    nav('/dashboard')
+  }
   return (
     <div className='Home-container'>
 
