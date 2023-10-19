@@ -59,7 +59,7 @@ class Users_Route(Resource):
                 first_name=request.get_json()['first_name'],
                 last_name=request.get_json()['last_name'],
                 email=request.get_json()['email'],
-                phone_number=int(request.get_json()['phone_number']),
+                # phone_number=int(request.get_json()['phone_number']),
                 age=int(request.get_json()['age']),
                 city=request.get_json()['city'],
                 username=request.get_json()['username'],

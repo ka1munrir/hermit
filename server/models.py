@@ -102,6 +102,8 @@ class Quest(db.Model, SerializerMixin):
         if genre not in GENRE:
             return ValueError(f'Status must be {GENRE}')
         return genre
+    
+    serialize_rules=('-review_rel', '-user_quest_rel')
 
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews_table'
