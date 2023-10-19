@@ -26,8 +26,8 @@ h1 {
 
 .questCardPopUp-div {
     position: fixed;
-    top: 40vh;
-    right: 20vw;
+    top: 10vh;
+    right: 10vw;
     width: 20vw;
     height: 59.1vh;
     background-image: url(../../assets/questPosting.png);
