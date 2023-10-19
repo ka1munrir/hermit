@@ -1,7 +1,7 @@
-import { React} from 'react'
+import { React } from 'react'
 import useUserStore from "../../hooks/userStore";
 import { NavLink } from 'react-router-dom'
-import'../navbar/NavBar.css'
+import '../navbar/NavBar.css'
 
 function NavBar() {
   const { user } = useUserStore();
@@ -19,7 +19,7 @@ function NavBar() {
     <header>
       <nav>
         <NavLink to='/dashboard'>Dashboard</NavLink>
-        <NavLink to='/'>Guilds</NavLink>
+        <NavLink to='/guilds'>Guilds</NavLink>
         <NavLink to='/'>Profile</NavLink>
         <NavLink to='/'>Log Out</NavLink>
       </nav>
