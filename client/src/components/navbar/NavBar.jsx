@@ -20,7 +20,6 @@ function NavBar() {
       <nav>
         <NavLink to='/dashboard'>Dashboard</NavLink>
         <NavLink to='/guilds'>Guilds</NavLink>
-        <NavLink to='/'>Profile</NavLink>
         <NavLink to='/'>Log Out</NavLink>
       </nav>
     </header>
