@@ -1,19 +1,13 @@
 import React from 'react'
 import './QuestCard.css'
 
-function QuestCard({ quest }) {
-  const { title } = quest
+function QuestCard({quest}) {
+  const { title, imgURL } = quest
   return (
     <div className='questCard-div'>
-
-      <p>{title}</p>
-      {/* <p>{description}</p>
-      <p>{genre}</p>
-      <p>{difficulty}</p>
-      <p>{city}</p>
-      <p>{age_restriction}</p> */}
-
-
+      {/* <img src={imgURL} alt={`${title} Image`} /> */}
+      <div style={{backgroundImage: `url(\"${imgURL}\")`}} className='image'></div>
+      <h1>{title}</h1>
     </div>
   )
 }

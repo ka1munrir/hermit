@@ -94,7 +94,7 @@ function Dashboard() {
         <h1>{title}</h1>
         <h2>{`@${username}`}</h2>
         <Popup trigger=
-                {<button className='editAccountBtn' onClick={() => changeProfileIsOpen()}>Edit Account</button>} 
+                {<button className='editAccountBtn' >Edit Account</button>} 
                 modal nested>
                 {
                     close => (
