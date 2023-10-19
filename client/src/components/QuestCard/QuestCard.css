@@ -8,6 +8,8 @@
     flex-direction: column;
     align-items: center;
     border-radius: .25em;
+    margin: 0rem 1rem;
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
 }
 
 .image {
@@ -28,7 +30,7 @@ h1 {
     position: fixed;
     top: 25vh;
     right: 24vw;
-    width: 20vw;
+    width: 16vw;
     height: 59.1vh;
     background-image: url(../../assets/questPosting.png);
     background-size: 20vw;
@@ -37,6 +39,7 @@ h1 {
     align-items: center;
     border-radius: .25em;
     filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
+    padding: 0vh 2vw;
 }
 .imagePopUp{
     margin: 5em 1em 0em 1em;
@@ -44,4 +47,15 @@ h1 {
     width: 17vw;
     background-size: 17vw;
     border: .2em solid black;
+}
+.topQuestDetails{
+    width: 17vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.questDetails{
+    margin: .4em 0em;
+    font-weight: 900;
+    text-align: center;
 }

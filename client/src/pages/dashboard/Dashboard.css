@@ -30,27 +30,25 @@
 }
 
 .questsTakenContainer{
-    margin: 1rem 4.75rem;
+    margin: 1rem 30rem 1rem 4.75rem;
     display: flex;
-}
-.questCard-div{
-    margin: 0rem 1rem;
-    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
+    /* border: 1em solid black; */
+    height: 70vh;
 }
 
 
 .sideBar-div{
-    grid-row: 1 / 1;
-    grid-column: 2 / 2;
+    position: fixed;
     width: 17vw;
-    height: 100%;
+    height: 85vh;
+    top: 12vh;
+    right: 2vw;
     background-color: var(--primary);
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
-            10px 10px 15px rgba(70,70,70,0.12);
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 #sideBarImg{
     width: 13vw;

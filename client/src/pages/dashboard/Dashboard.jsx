@@ -22,7 +22,7 @@ function Dashboard() {
         console.log(data)
         setUserQuests(data)
       });
-  }, []);
+  }, [user]);
 
   const questsToDisp = userQuests.filter(quest => quest.status === 'In Progress' || quest.status === 'Not Started')
 
@@ -85,7 +85,7 @@ function Dashboard() {
         </div>
         <div className='questsTakenContainer'>
           {
-            questsToDisp.map(userQuest => <QuestCard key={userQuest.id} quest={userQuest[`quest_rel`]}/>)
+            questsToDisp.map(userQuest => <QuestCard key={userQuest.id} quest={userQuest[`quest_rel`]} status={userQuest['status']} id={userQuest.id} setUserQuests={setUserQuests} userQuests={userQuests} userQuest={userQuest}/>)
           }
         </div>
       </div>
