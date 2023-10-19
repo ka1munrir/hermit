@@ -7,7 +7,7 @@ function NavBar() {
   const { user } = useUserStore();
 
   const loggedOutNavBar = (
-    <header>
+    <header >
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/login">Log In</NavLink>
