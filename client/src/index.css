@@ -8,10 +8,10 @@
   --secondary: rgb(255, 245, 214);
   --accent: rgb(207, 67, 7);
   margin: 0;
+  font-family: 'Almendra SC', serif;
 }
 
 body {
   background-color: var(--background);
   color: var(--text);
-  font-family: 'Open Sans', sans-serif;
 }
