@@ -1,3 +1,6 @@
+
+
+
 import { React, useEffect, useState } from 'react';
 import GuildQuestCard from '../../components/GuildQuestCard/GuildQuestCard'
 import './Guilds.css'; // Make sure to adjust the path to your CSS file
@@ -5,7 +8,7 @@ import './Guilds.css'; // Make sure to adjust the path to your CSS file
 function Guilds() {
 
     const [guildQuests, setGuildQuests] = useState([])
-    const [guildFilter, setGuildFilter] = useState("")
+    const [guildFilter, setGuildFilter] = useState("No Cards What So Ever")
 
 
     useEffect(() => {
@@ -42,18 +45,21 @@ function Guilds() {
     return (
         <div className='guilds-display'>
             <h1 className="guilds-title">GUILDS</h1>
-            <div className="guilds">
+            <div className='quest-row' >
                 {
                     questsToDisp.map(guildQuest => <GuildQuestCard key={guildQuests['id']} quest={guildQuest} />)
                 }
             </div>
-            <div>
-                {guildsData.map((guild, index) => (
-                    <div className="guild" onClick={() => setGuildFilter(guild.name)}>
+            <div className="guilds">
+                {guildsData.map((guild) => (
+                    <div className="guild" onClick={() => {
+                        guildFilter === guild.name ? setGuildFilter(`No Cards What So Ever`) : setGuildFilter(guild.name)
+
+                    }}>
                         <img className={`${guild.name.toLowerCase()}-image`} src={guild.imageUrl} alt={`${guild.name} Guild`} />
                         <h2>{guild.name} Guild</h2>
                         <p>{guild.description}</p>
-                        <a href={guild.link} key={index} />
+
                     </div>
                 ))}
 

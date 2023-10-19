@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Almendra+SC&display=swap');
 
-.dash-div{
+.dash-div {
     width: 100vw;
     height: 80vh;
-    display: grid; 
-    grid-template-columns: 8fr 2fr; 
-    grid-template-rows: 1fr; 
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-template-rows: 1fr;
     margin-top: 2rem;
 }
 
 
 
-.questsTaken-div{
+.questsTaken-div {
     grid-row: 1 / 1;
     grid-column: 1 / 1;
 }
 
-.title-div{
+.title-div {
     display: grid;
     height: fit-content;
     justify-content: center;
@@ -25,20 +25,25 @@
     margin: 0rem 4rem;
     border-bottom: .25em ridge var(--primary);
 }
-.title-div>h1{
+
+.title-div>h1 {
     margin: 0em;
 }
 
-.questsTakenContainer{
-    margin: 1rem 30rem 1rem 4.75rem;
+.questsTakenContainer {
+    margin: 1rem 4.75rem;
     display: flex;
-    /* border: 1em solid black; */
-    height: 70vh;
+}
+
+.questCard-div {
+    margin: 0rem 1rem;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
 }
 
 
-.sideBar-div{
-    position: fixed;
+.sideBar-div {
+    grid-row: 1 / 1;
+    grid-column: 2 / 2;
     width: 17vw;
     height: 85vh;
     top: 12vh;
@@ -48,9 +53,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+        10px 10px 15px rgba(70, 70, 70, 0.12);
 }
-#sideBarImg{
+
+#sideBarImg {
     width: 13vw;
     height: 13vw;
     border-radius: 50%;
@@ -58,39 +65,38 @@
 }
 
 
-*/
 .popup-box {
-  position: fixed;
-  background: #00000050;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
+    position: fixed;
+    background: #00000050;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
 }
 
 .box {
-  position: relative;
-  width: 70%;
-  margin: 0 auto;
-  height: auto;
-  max-height: 70vh;
-  background: #fff;
-  border-radius: 4px;
-  padding: .57em 1.5em;
-  border: 1px solid #999;
-  overflow: auto;
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+    height: auto;
+    max-height: 70vh;
+    background: #fff;
+    border-radius: 4px;
+    padding: .57em 1.5em;
+    border: 1px solid #999;
+    overflow: auto;
 }
 
 .close-icon {
-  cursor: pointer;
-  position: relative;
-  right: -95%;
-  top: -30%;
-  width: 25px;
-  height: 25px;
-  line-height: 20px;
-  text-align: center;
-  border: none;
-  background-color: none;
-  font-size: 20px;
+    cursor: pointer;
+    position: relative;
+    right: -95%;
+    top: -30%;
+    width: 25px;
+    height: 25px;
+    line-height: 20px;
+    text-align: center;
+    border: none;
+    background-color: none;
+    font-size: 20px;
 }
