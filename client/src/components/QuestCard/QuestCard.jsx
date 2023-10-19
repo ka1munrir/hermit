@@ -1,5 +1,4 @@
 import React from 'react'
-import questPosting from '../../assets/questPosting.png'
 import './QuestCard.css'
 
 function QuestCard({quest}) {

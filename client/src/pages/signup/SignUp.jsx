@@ -9,7 +9,6 @@ const Signup = () => {
             first_name: '',
             last_name: '',
             email: '',
-            // phone_number: 1000000000,
             age: 0,
             city: '',
             username: '',
@@ -19,7 +18,6 @@ const Signup = () => {
             first_name: Yup.string().required('Required'),
             last_name: Yup.string().required('Required'),
             email: Yup.string().required('Required').email('Invalid email address'),
-            // phone_number: Yup.number(),
             age: Yup.number().required('Required'),
             city: Yup.string(),
             username: Yup.string().required('Required'),
@@ -33,9 +31,8 @@ const Signup = () => {
 
             const userObject = {
                 "first_name": values.first_name,
-                "last_name": values.first_name,
+                "last_name": values.last_name,
                 "email": values.email,
-                // "phone_number": values.phone_number,
                 "age": values.age,
                 "city": values.city,
                 "username": values.username,
