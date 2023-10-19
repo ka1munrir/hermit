@@ -1,7 +1,22 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
+import GuildQuestCard from '../../components/GuildQuestCard/GuildQuestCard'
 import './Guilds.css'; // Make sure to adjust the path to your CSS file
 
 function Guilds() {
+
+    const [guildQuests, setGuildQuests] = useState([])
+    const [guildFilter, setGuildFilter] = useState("")
+
+
+    useEffect(() => {
+        fetch(`/api/quests`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                setGuildQuests(data)
+            });
+    }, []);
+    const questsToDisp = guildQuests.filter(quest => quest.genre.toLowerCase().includes(guildFilter.toLowerCase()))
     const guildsData = [
         {
             name: "Mage",
@@ -22,21 +37,28 @@ function Guilds() {
             link: "bard-guild-link",
         },
     ];
-
+    console.log(guildQuests)
+    console.log(questsToDisp)
     return (
-        <>
+        <div className='guilds-display'>
             <h1 className="guilds-title">GUILDS</h1>
             <div className="guilds">
+                {
+                    questsToDisp.map(guildQuest => <GuildQuestCard key={guildQuests['id']} quest={guildQuest} />)
+                }
+            </div>
+            <div>
                 {guildsData.map((guild, index) => (
-                    // <a href={guild.link} key={index} className="guild">
-                    <div className="guild">
+                    <div className="guild" onClick={() => setGuildFilter(guild.name)}>
                         <img className={`${guild.name.toLowerCase()}-image`} src={guild.imageUrl} alt={`${guild.name} Guild`} />
                         <h2>{guild.name} Guild</h2>
                         <p>{guild.description}</p>
+                        <a href={guild.link} key={index} />
                     </div>
                 ))}
+
             </div>
-        </>
+        </div>
     );
 }
 
@@ -47,41 +69,3 @@ export default Guilds;
 
 
 
-
-
-// import React from 'react';
-// import './Guilds.css'; // Make sure to adjust the path to your CSS file
-
-// function Guilds() {
-//     const guildsData = [
-//         {
-//             name: "Mage",
-//             description: "The Mage Guild specializes in the arcane arts, casting powerful spells and harnessing the forces of magic.",
-//             imageUrl: "https://image.pngaaa.com/809/1843809-middle.png",
-//         },
-//         {
-//             name: "Warrior",
-//             description: "The Warrior Guild is known for its brave and skilled fighters who excel in combat and martial skills.",
-//             imageUrl: "https://pngimg.com/uploads/viking/viking_PNG43.png",
-//         },
-//         {
-//             name: "Bard",
-//             description: "The Bard Guild is a gathering place for storytellers, musicians, and entertainers who captivate with their talents.",
-//             imageUrl: "https://icon2.cleanpng.com/20180514/oiw/kisspng-dungeons-dragons-pathfinder-roleplaying-game-bar-5afa1115e29af9.3636125915263378139282.jpg",
-//         },
-//     ];
-
-//     return (
-//         <div className="guilds">
-//             {guildsData.map((guild, index) => (
-//                 <div className="guild" key={index}>
-//                     <img className={`${guild.name.toLowerCase()}-image`} src={guild.imageUrl} alt={`${guild.name} Guild`} />
-//                     <h2>{guild.name} Guild</h2>
-//                     <p>{guild.description}</p>
-//                 </div>
-//             ))}
-//         </div>
-//     );
-// }
-
-// export default Guilds;

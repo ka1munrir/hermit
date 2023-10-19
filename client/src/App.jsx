@@ -23,6 +23,7 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<SignUp />} />
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/guilds' element={<Guilds />} />
+      {/* <Route path="/quest/:title" element={QuestCard} /> */}
 
     </Route>
   )
