@@ -20,6 +20,7 @@ function Dashboard() {
         setUserQuests(data)
       });
   }, []);
+  const questsToDisp = userQuests.filter(quest => quest.status === 'In Progress' || quest.status === 'Not Started')
 
   const profileSidebar = (
     <>
@@ -54,7 +55,10 @@ function Dashboard() {
           <h1>Quests</h1>
         </div>
         <div className='questsTakenContainer'>
-            <QuestCard quest={{title:"Cherry Cricket", imgURL:"https://wp-denverite.s3.amazonaws.com/wp-content/uploads/sites/4/2017/04/170411-CHERRY-CRICKET-KEVINJBEATY-11.jpg"}}/>
+          {
+            questsToDisp.map(userQuest => <QuestCard key={userQuest.id} quest={userQuest[`quest_rel`]}/>)
+          }
+            {/* <QuestCard quest={{title:"Cherry Cricket", imgURL:"https://wp-denverite.s3.amazonaws.com/wp-content/uploads/sites/4/2017/04/170411-CHERRY-CRICKET-KEVINJBEATY-11.jpg"}}/> */}
         </div>
         <div>
 

@@ -31,6 +31,11 @@
 
 .questsTakenContainer{
     margin: 1rem 4.75rem;
+    display: flex;
+}
+.questCard-div{
+    margin: 0rem 1rem;
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
 }
 
 
@@ -44,6 +49,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
+            10px 10px 15px rgba(70,70,70,0.12);
 }
 #sideBarImg{
     width: 13vw;
