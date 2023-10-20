@@ -24,28 +24,41 @@ h1 {
 }
 
 
-.questCardPopUp-div {
-    position: fixed;
-    top: 40vh;
-    right: 20vw;
-    width: 20vw;
-    height: 62.7vh;
-    /* width: 800px;
-    height: 800px; */
+/* -------------------------------------------------------- */
+#guildQuestCardPopUp-div {
+    position: relative;
+    top: 6vh;
+    right: -15vw;
+    width: 16vw;
+    height: 60.5vh;
     background-image: url(../../assets/questPosting.png);
     background-size: 20vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     border-radius: .25em;
     filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
-    text-align: center;
+    padding: 0vh 2vw;
 }
 
-.imagePopUp {
-    margin: 5em 1em 0em 1em;
-    height: 24vh;
-    width: 17vw;
+#guildQuestCardImagePopUp {
+    margin: 2.5em 1em -1em 1em;
+    height: 25vh;
+    width: 16vw;
     background-size: 17vw;
     border: .2em solid black;
+}
+
+#topGuildQuestDetails {
+    width: 17vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.guildQuestDetails {
+    font-weight: 900;
+    text-align: center;
+    margin: .25em 0em;
 }
