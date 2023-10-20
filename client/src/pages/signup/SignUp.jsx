@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
+import './SignUp.css'
 
 const Signup = () => {
     const nav = useNavigate();
@@ -64,94 +65,86 @@ const Signup = () => {
     });
 
     return (
-        <form onSubmit={(e) => {
-            formik.handleSubmit(e);
-            nav("/login");
-        }}>
-            <div className="input-group">
-                <label>First Name</label>
-                <input
-                    type="first_name"
-                    {...formik.getFieldProps('first_name')}
-                />
-                {formik.touched.first_name && formik.errors.first_name ? (
-                    <div className="error">{formik.errors.first_name}</div>
-                ) : null}
-            </div>
-            <div className="input-group">
-                <label>Last Name</label>
-                <input
-                    type="last_name"
-                    {...formik.getFieldProps('last_name')}
-                />
-                {formik.touched.last_name && formik.errors.last_name ? (
-                    <div className="error">{formik.errors.last_name}</div>
-                ) : null}
-            </div>
-            <div className="input-group">
-                <label>Email</label>
-                <input
-                    type="email"
-                    {...formik.getFieldProps('email')}
-                />
-                {formik.touched.email && formik.errors.email ? (
-                    <div className="error">{formik.errors.email}</div>
-                ) : null}
-            </div>
-            {/* <div className="input-group">
-                <label>Phone Number</label>
-                <input
-                    type="phone_number"
-                    {...formik.getFieldProps('phone_number')}
-                />
-                {formik.touched.phone_number && formik.errors.phone_number ? (
-                    <div className="error">{formik.errors.phone_number}</div>
-                ) : null}
-            </div> */}
-            <div className="input-group">
-                <label>Age</label>
-                <input
-                    type="age"
-                    {...formik.getFieldProps('age')}
-                />
-                {formik.touched.age && formik.errors.age ? (
-                    <div className="error">{formik.errors.age}</div>
-                ) : null}
-            </div>
-            <div className="input-group">
-                <label>City of Residence</label>
-                <input
-                    type="city"
-                    {...formik.getFieldProps('city')}
-                />
-                {formik.touched.city && formik.errors.city ? (
-                    <div className="error">{formik.errors.city}</div>
-                ) : null}
-            </div>
-            <div className="input-group">
-                <label>Username</label>
-                <input
-                    type="text"
-                    {...formik.getFieldProps('username')}
-                />
-                {formik.touched.username && formik.errors.username ? (
-                    <div className="error">{formik.errors.username}</div>
-                ) : null}
-            </div>
+        <div id='signUp-div'>
+            <form onSubmit={(e) => {
+                formik.handleSubmit(e);
+                nav("/login");
+            }}>
+                <div className="input-group">
+                    <label>First Name</label>
+                    <input
+                        type="first_name"
+                        {...formik.getFieldProps('first_name')}
+                    />
+                    {formik.touched.first_name && formik.errors.first_name ? (
+                        <div className="error">{formik.errors.first_name}</div>
+                    ) : null}
+                </div>
+                <div className="input-group">
+                    <label>Last Name</label>
+                    <input
+                        type="last_name"
+                        {...formik.getFieldProps('last_name')}
+                    />
+                    {formik.touched.last_name && formik.errors.last_name ? (
+                        <div className="error">{formik.errors.last_name}</div>
+                    ) : null}
+                </div>
+                <div className="input-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        {...formik.getFieldProps('email')}
+                    />
+                    {formik.touched.email && formik.errors.email ? (
+                        <div className="error">{formik.errors.email}</div>
+                    ) : null}
+                </div>
+                <div className="input-group">
+                    <label>Age</label>
+                    <input
+                        type="age"
+                        {...formik.getFieldProps('age')}
+                    />
+                    {formik.touched.age && formik.errors.age ? (
+                        <div className="error">{formik.errors.age}</div>
+                    ) : null}
+                </div>
+                <div className="input-group">
+                    <label>City of Residence</label>
+                    <input
+                        type="city"
+                        {...formik.getFieldProps('city')}
+                    />
+                    {formik.touched.city && formik.errors.city ? (
+                        <div className="error">{formik.errors.city}</div>
+                    ) : null}
+                </div>
+                <div className="input-group">
+                    <label>Username</label>
+                    <input
+                        type="text"
+                        {...formik.getFieldProps('username')}
+                    />
+                    {formik.touched.username && formik.errors.username ? (
+                        <div className="error">{formik.errors.username}</div>
+                    ) : null}
+                </div>
 
-            <div className="input-group">
-                <label>Password</label>
-                <input
-                    type="password"
-                    {...formik.getFieldProps('password')}
-                />
-                {formik.touched.password && formik.errors.password ? (
-                    <div className="error">{formik.errors.password}</div>
-                ) : null}
-            </div>
+                <div className="input-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        {...formik.getFieldProps('password')}
+                    />
+                    {formik.touched.password && formik.errors.password ? (
+                        <div className="error">{formik.errors.password}</div>
+                    ) : null}
+                </div>
 
-            <button type="submit">Signup</button>
-        </form>
+                <button type="submit">Signup</button>
+            </form>
+        </div>
     );
 };
 
