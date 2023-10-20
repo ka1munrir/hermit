@@ -1,4 +1,52 @@
-
+.login-container{
+    height: 85vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#logInForm{
+    width: 20vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: .5em;
+    border: .1em solid black;
+    border-radius: 1em;
+    background-color: var(--secondary);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+#logInTitle{
+    margin-top: -.3em;
+    margin-bottom: -0.2em;
+    font-size: 8em;
+}
+.input-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+}
+.logInLabel{
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: .25em;
+}
 .logInInput{
     font-family: 'Almendra', serif;
+    font-size: 1.5em;
+    width: 10vw;
+    background-color: var(--background);
+    border: .05em solid black;
+    border-radius: .25em;
+    padding: 0em .5em;
+}
+#logInButton{
+    width: 10vw;
+    height: 5vh;
+    font-size: 2em;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }

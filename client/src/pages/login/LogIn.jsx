@@ -41,10 +41,10 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
       <form onSubmit={handleSubmit} id='logInForm'>
+        <h2 id='logInTitle'>Login</h2>
         <div className="input-group">
-          <label>Username:</label>
+          <label className="logInLabel">Username:</label>
           <input
             className="logInInput"
             type="text"
@@ -54,7 +54,7 @@ function Login() {
           />
         </div>
         <div className="input-group">
-          <label>Password:</label>
+          <label className="logInLabel">Password:</label>
           <input
             className="logInInput"
             type="password"
@@ -63,7 +63,7 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" id="logInButton">Login</button>
       </form>
     </div>
   );
