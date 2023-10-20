@@ -37,7 +37,7 @@ api.add_resource(Login_Route, '/login')
 class Logout_Route(Resource):
     def delete(self):
         session['user_id'] = None
-        return {''}, 204
+        return {'Message':''}, 204
 api.add_resource(Logout_Route, '/logout')
 
 class CheckSession(Resource):

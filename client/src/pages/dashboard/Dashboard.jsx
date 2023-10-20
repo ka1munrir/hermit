@@ -5,26 +5,29 @@ import Popup from 'reactjs-popup';
 import '../dashboard/Dashboard.css'
 import QuestCard from '../../components/QuestCard/QuestCard'
 import useUserStore from "../../hooks/userStore";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const {user, updateUser} = useUserStore()
+  const {user, updateUser, deleteUser} = useUserStore()
   const [userQuests, setUserQuests] = useState([])
   const{id, first_name, last_name, email, age, city, username} = user
   const [showProfile, setShowProfile] = useState(true)
   const [image, setImage] = useState("https://thispersondoesnotexist.com/")
   const [ title, setTitle] = useState(`${first_name} ${last_name}`)
   const [content, setContent] = useState("")
+  const nav = useNavigate();
 
   useEffect(() => {
     fetch(`/api/users/${user.id}/userquests`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setUserQuests(data)
       });
   }, [user]);
 
   const questsToDisp = userQuests.filter(quest => quest.status === 'In Progress' || quest.status === 'Not Started')
+  const completedQuests = userQuests.filter(quest => quest.status === 'Completed')
+  const forsakenQuests = userQuests.filter(quest => quest.status === 'Forsaken')
 
     const formik = useFormik({
         initialValues: {
@@ -91,8 +94,30 @@ function Dashboard() {
       </div>
       <div className='sideBar-div'>
         <img src={image} alt={`${title} Image`} id='sideBarImg'/>
-        <h1>{title}</h1>
-        <h2>{`@${username}`}</h2>
+        <div className='questStat-div'>
+            <h1>{title}</h1>
+            <h2>{`@${username}`}</h2>
+        </div>
+        <div className='questStat-div'>
+            <h4 className='questStat-h4'>Completed Quests</h4>
+            <p className='questStat-p'>{completedQuests.length}</p>
+        </div>
+        <div className='questStat-div'>
+            <h4 className='questStat-h4'>Completed Mage Quests</h4>
+            <p className='questStat-p'>{[...completedQuests.filter(cQuest => cQuest[`quest_rel`]['genre'] === 'Mage')].length}</p>
+        </div>
+        <div className='questStat-div'>
+            <h4 className='questStat-h4'>Completed Warrior Quests</h4>
+            <p className='questStat-p'>{[...completedQuests.filter(cQuest => cQuest[`quest_rel`]['genre'] === 'Warrior')].length}</p>
+        </div>
+        <div className='questStat-div'>
+            <h4 className='questStat-h4'>Completed Bard Quests</h4>
+            <p className='questStat-p'>{[...completedQuests.filter(cQuest => cQuest[`quest_rel`]['genre'] === 'Bard')].length}</p>
+        </div>
+        <div className='questStat-div'>
+            <h4 className='questStat-h4'>Forsaken Quests</h4>
+            <p className='questStat-p'>{forsakenQuests.length}</p>
+        </div>
         <Popup trigger=
                 {<button className='editAccountBtn' >Edit Account</button>} 
                 modal nested>
@@ -173,7 +198,32 @@ function Dashboard() {
                 }
             </Popup>
         
-        <button className='deleteAccountBtn'>Delete Account</button>
+        <button className='deleteAccountBtn' onClick={(e) => {
+            fetch("/api/logout", {method: "DELETE"})
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Network response error");
+                }
+              })
+              .then(() => {
+                fetch(`/api/users/${id}`, {method: 'DELETE'})
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response error");
+                      }
+                })
+                .then(() => {
+                    deleteUser();
+                    nav("/");
+                })
+                .catch((error) => {
+                    console.log("error", error.message);
+                })
+              })
+              .catch((error) => {
+                console.log("error", error.message);
+              });
+        }}>Delete Account</button>
       </div>
     </div>
   )

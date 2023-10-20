@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const userStore = (set) => ({
-  user: {},
+  user: null,
   updateUser: (newUser) =>
     set(() => ({
       user: newUser,

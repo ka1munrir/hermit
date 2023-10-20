@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import'./LogIn.css'
 import useUserStore from "../../hooks/userStore";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { updateUser} = useUserStore();
+  const { user, updateUser} = useUserStore();
 
   const nav = useNavigate();
 
@@ -24,7 +25,7 @@ function Login() {
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error("Network response error");
+          throw new Error(`${response.json()}`);
         }
         return response.json();
       })
@@ -35,16 +36,17 @@ function Login() {
       })
       .catch(error => {
         console.log("error", error.message);
-      });
-  };
+      })
+    };
 
   return (
     <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id='logInForm'>
         <div className="input-group">
           <label>Username:</label>
           <input
+            className="logInInput"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -54,6 +56,7 @@ function Login() {
         <div className="input-group">
           <label>Password:</label>
           <input
+            className="logInInput"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

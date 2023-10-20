@@ -36,24 +36,24 @@ function QuestCard({ setUserQuests, userQuests, userQuest}) {
   return (
       <Popup trigger=
           {
-            <div className='questCard-div'>
-              <div style={{backgroundImage: `url(\"${title}\")`}} className='image'></div>
-              <h1>{title}</h1>
+            <div id='userQuestCard-div'>
+              <div style={{backgroundImage: `url(\"${title}\")`}} id='userQuestCardImage'></div>
+              <h1 id='userQuestCardTitle'>{title}</h1>
             </div>
           } 
           modal nested>
           {
               close => (
-                <div className='questCardPopUp-div'>
-                <div style={{backgroundImage: `url(\"${title}\")`}} className='imagePopUp'></div>
+                <div id='userQuestCardPopUp-div'>
+                <div style={{backgroundImage: `url(\"${title}\")`}} id='userQuestCardImagePopUp'></div>
                 <h1>{title}</h1>
-                <div className='topQuestDetails'>
-                  <p className='questDetails'>{`Age: ${age_restriction}+`}</p>
-                  <p className='questDetails'>{`Difficulty: ${difficulty}`}</p>
-                  <p className='questDetails'>{`City: ${city}`}</p>
+                <div id='topUserQuestDetails'>
+                  <p className='userQuestDetails'>{`Age: ${age_restriction}+`}</p>
+                  <p className='userQuestDetails'>{`Difficulty: ${difficulty}`}</p>
+                  <p className='userQuestDetails'>{`City: ${city}`}</p>
                 </div>
-                <p className='questDetails'>{`Guild: ${genre}`}</p>
-                <p className='questDetails'>{description}</p>
+                <p className='userQuestDetails'>{`Guild: ${genre}`}</p>
+                <p className='userQuestDetails'>{description}</p>
                 <select name="status" id="statusSelector" defaultValue={status} onChange={(e) => changeStatus(e.target.value)}>
                   <option value="Not Started">Not Started</option>
                   <option value="In Progress">In Progress</option>

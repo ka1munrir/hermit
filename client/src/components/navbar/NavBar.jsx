@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import '../navbar/NavBar.css'
 
 function NavBar() {
-  const { user } = useUserStore();
+  const { user, deleteUser } = useUserStore();
 
   const loggedOutNavBar = (
     <header >
@@ -20,11 +20,21 @@ function NavBar() {
       <nav>
         <NavLink to='/dashboard'>Dashboard</NavLink>
         <NavLink to='/guilds'>Guilds</NavLink>
-        <NavLink to='/'>Log Out</NavLink>
+        <NavLink to='/' onClick={() => {
+          fetch("/api/logout", {method: "DELETE"})
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response error");
+            }
+          })
+          .then(() => {
+            deleteUser()
+          })
+        }}>Log Out</NavLink>
       </nav>
     </header>
   )
-  return user.username ? loggedInNavBar : loggedOutNavBar
+  return user ? loggedInNavBar : loggedOutNavBar
 
 }
 

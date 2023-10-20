@@ -7,7 +7,7 @@ import useUserStore from "../../hooks/userStore";
 function Home() {
   const nav = useNavigate();
   const { user } = useUserStore();
-  if (user.username != undefined){
+  if (user != undefined){
     nav('/dashboard')
   }
   return (
