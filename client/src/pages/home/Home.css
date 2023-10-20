@@ -5,13 +5,16 @@
     width: fit-content;
     margin-left: 15rem;
     margin-right: 15rem;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-h1 {
+.Title-container {
     font-size: 6rem;
-    margin-top: 2.5rem;
-    margin-bottom: 7rem;
+    margin-top: -5rem;
+    margin-bottom: 2rem;
+}
+.Description-container{
+    font-size: 1.5em;
 }
