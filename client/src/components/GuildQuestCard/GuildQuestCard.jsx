@@ -16,14 +16,16 @@ function QuestCard({ quest }) {
       modal nested>
       {
         close => (
-          <div className='questCardPopUp-div'>
-            <div style={{ backgroundImage: `url(\"${imgURL}\")` }} className='imagePopUp'></div>
-            <p>{title}</p>
-            <p>{description}</p>
-            <p>{genre}</p>
-            <p>{difficulty}</p>
-            <p>{city}</p>
-            <p>{age_restriction}</p>
+          <div className='popup-div'>
+            <div className='questCardPopUp-div'>
+              <div style={{ backgroundImage: `url(\"${imgURL}\")` }} className='imagePopUp'></div>
+              <p>{title}</p>
+              <p>{description}</p>
+              <p>{genre}</p>
+              <p>{difficulty}</p>
+              <p>{city}</p>
+              <p>{age_restriction}</p>
+            </div>
           </div>
         )
       }
